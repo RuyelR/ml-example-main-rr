@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import pandas as pd
-import sklearn
 import altair as alt
 
 
