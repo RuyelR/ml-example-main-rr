@@ -12,39 +12,45 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import pandas as pd
+import sklearn
+import altair as alt
+
+
 import streamlit as st
 from streamlit.logger import get_logger
 
 LOGGER = get_logger(__name__)
 
+def iris_clean_data():
+    data_file = 'Iris_Data.csv'
+    data = pd.read_csv(data_file)
+    data["species"] = data["species"].str.removeprefix("Iris-")
+    return data
 
 def run():
     st.set_page_config(
-        page_title="Hello",
+        page_title="Welcome",
         page_icon="👋",
     )
 
-    st.write("# Welcome to Streamlit! 👋")
+    st.write("# Welcome to ML examples! 👋")
 
     st.sidebar.success("Select a demo above.")
 
     st.markdown(
         """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
-        **👈 Select a demo from the sidebar** to see some examples
-        of what Streamlit can do!
-        ### Want to learn more?
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
-        ### See more complex demos
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
+        Welcome to my first app demonstrating three different ML approaches to the Iris dataset.
     """
     )
+    st.write("### A sample of dataset:")
+    data = iris_clean_data()
+    st.write(data.head()) 
+    Sdtframe = data.groupby('species')
+    st.write("Mean: \n",Sdtframe.mean())
+    st.write("\nMedian/50% quantile: \n", Sdtframe.quantile())
+    st.scatter_chart(data=data,x='sepal_length', y='sepal_width',size=30,use_container_width=True)
+    st.bar_chart(data=data, x='petal_length', y='petal_width', use_container_width=True)
 
 
 if __name__ == "__main__":
