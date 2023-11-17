@@ -12,36 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pandas as pd
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing  import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import confusion_matrix,accuracy_score
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
 import numpy as np
 
 import streamlit as st
 from streamlit.hello.utils import show_code
-from Hello import iris_clean_data
-
+from utils import iris_clean_data,accuracy_display,cm_display,user_demo
 
 def Decision_Tree_demo():
     data = iris_clean_data()
-    st.write('Dataset: ')   
-    st.write(data.head())
+    # st.write('Dataset: ')   
+    # st.write(data.head())
     X = data.drop(columns='species')
     Y = data['species']
     x_train,x_test,y_train,y_test=train_test_split(X,Y,test_size=.5, random_state=2)
     clf = DecisionTreeClassifier()
     y_pred = clf.fit(x_train, y_train).predict(x_test)
-    cm = confusion_matrix(y_test, y_pred)
-    st.write('### Confusion matrix:')
-    cm
-    accuracy = accuracy_score(y_test, y_pred)*100
-    st.write(f'# Accuracy of the model is equal to ' + str(round(accuracy, 2)) + ' %.')
+    
+    user_demo(clf)
+    accuracy_display(y_test, y_pred)
+    cm_display(y_test, y_pred)
+
     cross_val = cross_val_score(clf,X, Y, cv=4, scoring='accuracy')
-    st.write("### Decision Tree Classifier Accuracy crossvalidation cv=4:", cross_val)
     st.write("### The  Decision Tree average accuracy of crossvalidation cv=4 is equal to "+ str(round(np.mean(cross_val), 2)) + ' %.')
     
 

@@ -14,13 +14,46 @@
 
 import inspect
 import textwrap
+import pandas as pd
+from sklearn.metrics import confusion_matrix,accuracy_score
 
 import streamlit as st
 
+def accuracy_display(y_test, y_pred):
+    accuracy = accuracy_score(y_test, y_pred)*100
+    st.write(f'# Accuracy of the model = ' +":green[%s]"%(str(round(accuracy, 2))) + ' %.')
+    pass
+
+def cm_display(y_test, y_pred):
+    cm = confusion_matrix(y_test, y_pred)
+    st.write('## Confusion matrix:')
+    st.write(cm)
+
+
+def iris_clean_data():
+    data_file = 'Iris_Data.csv'
+    data = pd.read_csv(data_file)
+    data["species"] = data["species"].str.removeprefix("Iris-")
+    return data
+
+def user_demo(classifier, labelen=None):
+    data = iris_clean_data()
+    X = data.drop(columns='species')
+    # User input
+    spl = st.text_input(label="Sepal length",value="5")
+    spw = st.text_input(label="Sepal width",value="3")
+    ptl = st.text_input(label="Petal length",value="1.4")
+    ptw = st.text_input(label="Petal width",value="0.2")
+    # Predictions
+    flower_stat = pd.DataFrame(data=[[spl, spw, ptl, ptw]],columns= X.columns)
+    flower_pred = classifier.predict(flower_stat)
+    if labelen:
+        flower_pred = labelen.inverse_transform(flower_pred)
+    st.markdown("## The predicted result is: " + f":violet[%s]"%flower_pred[0])
 
 def show_code(demo):
     """Showing the code of the demo."""
-    show_code = st.sidebar.checkbox("Show code", True)
+    show_code = st.sidebar.checkbox("Show code", value=False)
     if show_code:
         # Showing the code of the demo.
         st.markdown("## Code")

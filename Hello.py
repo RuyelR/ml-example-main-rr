@@ -12,20 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pandas as pd
 import altair as alt
-
-
 import streamlit as st
 from streamlit.logger import get_logger
+from utils import iris_clean_data
 
 LOGGER = get_logger(__name__)
-
-def iris_clean_data():
-    data_file = 'Iris_Data.csv'
-    data = pd.read_csv(data_file)
-    data["species"] = data["species"].str.removeprefix("Iris-")
-    return data
 
 def run():
     st.set_page_config(
