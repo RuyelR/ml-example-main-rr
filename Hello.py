@@ -21,7 +21,7 @@ LOGGER = get_logger(__name__)
 
 def run():
     st.set_page_config(
-        page_title="Welcome",
+        page_title="Welcome to ML model demo",
         page_icon="👋",
     )
 
