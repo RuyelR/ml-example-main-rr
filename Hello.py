@@ -34,9 +34,17 @@ def run():
         Welcome to my first app demonstrating three different machine learning algorithm approaches to the Iris dataset.
     """
     )
-    st.write("### A sample of dataset:")
     data = iris_clean_data()
-    st.write(data.head()) 
+
+    if st.sidebar.toggle(label="Check Data",value=False) != False:
+        n_rows = st.sidebar.slider(label="Number of rows", min_value=1,max_value=5,value=3)
+        st.write("### Sample of dataset:")
+        st.write("First %s rows: "%n_rows, data.head(n_rows))
+        start_index = (len(data) - n_rows) // 2
+        st.write("Middle %s rows:"%n_rows, data.iloc[start_index:start_index + n_rows])
+        st.write("Last %s rows:"%n_rows, data.tail(n_rows))
+    if st.sidebar.toggle(label="Describe data",value=False) != False:
+        st.write("### Describing all features: ", data.describe()) 
     Sdtframe = data.groupby('species')
     st.write("Mean: \n",Sdtframe.mean())
     st.write("\nMedian/50% quantile: \n", Sdtframe.quantile().pivot_table(columns="species",))
