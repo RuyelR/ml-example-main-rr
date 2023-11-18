@@ -21,7 +21,7 @@ LOGGER = get_logger(__name__)
 
 def run():
     st.set_page_config(
-        page_title="Welcome to ML model demo",
+        page_title="Welcome to ml demo",
         page_icon="👋",
     )
 
@@ -31,7 +31,7 @@ def run():
 
     st.markdown(
         """
-        Welcome to my first app demonstrating three different machine learning algorithm approaches to the Iris dataset.
+        Hi! I am Ruyel and this is my first Streamlit app demonstrating three different machine learning algorithm approaches to the Iris dataset.
     """
     )
     data = iris_clean_data()
