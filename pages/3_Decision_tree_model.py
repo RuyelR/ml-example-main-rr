@@ -19,7 +19,7 @@ import numpy as np
 
 import streamlit as st
 from streamlit.hello.utils import show_code
-from utils import iris_clean_data,accuracy_display,cm_display,user_demo,user_guide
+from utils import iris_clean_data,accuracy_display,cm_display,user_demo
 
 def Decision_Tree_demo():
     data = iris_clean_data()

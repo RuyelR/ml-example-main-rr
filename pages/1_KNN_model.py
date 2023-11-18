@@ -18,7 +18,7 @@ from sklearn.model_selection import train_test_split
 
 import streamlit as st
 from streamlit.hello.utils import show_code
-from utils import iris_clean_data,user_demo,accuracy_display,cm_display,user_guide
+from utils import iris_clean_data,user_demo,accuracy_display,cm_display
 
 def KNN_demo():
     weight = st.radio(label='Weight', options=('uniform','distance'), help='Pick which weight you want to test', disabled=False, label_visibility="visible")
