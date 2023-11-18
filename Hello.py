@@ -25,13 +25,13 @@ def run():
         page_icon="👋",
     )
 
-    st.write("# Welcome to ML examples! 👋")
+    st.write("# Welcome to my machine learning algorithm demo! 👋")
 
     st.sidebar.success("Select a demo above.")
 
     st.markdown(
         """
-        Welcome to my first app demonstrating three different ML approaches to the Iris dataset.
+        Welcome to my first app demonstrating three different machine learning algorithm approaches to the Iris dataset.
     """
     )
     st.write("### A sample of dataset:")
@@ -39,7 +39,7 @@ def run():
     st.write(data.head()) 
     Sdtframe = data.groupby('species')
     st.write("Mean: \n",Sdtframe.mean())
-    st.write("\nMedian/50% quantile: \n", Sdtframe.quantile())
+    st.write("\nMedian/50% quantile: \n", Sdtframe.quantile().pivot_table(columns="species",))
     st.scatter_chart(data=data,x='sepal_length', y='sepal_width',size=30,use_container_width=True)
     st.bar_chart(data=data, x='petal_length', y='petal_width', use_container_width=True)
 

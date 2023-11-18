@@ -18,13 +18,12 @@ from sklearn.model_selection import train_test_split
 
 import streamlit as st
 from streamlit.hello.utils import show_code
-from utils import iris_clean_data,user_demo,accuracy_display,cm_display
+from utils import iris_clean_data,user_demo,accuracy_display,cm_display,user_guide
 
 def KNN_demo():
     weight = st.radio(label='Weight', options=('uniform','distance'), help='Pick which weight you want to test', disabled=False, label_visibility="visible")
     n_val = st.sidebar.select_slider(label="KNN neighbors", options=(1,2,3,4,5,6),value=3,help='Select the number of neighbors for the KNN')
     data = iris_clean_data()
-    # st.write(data.head())
     X = data.drop(columns='species')
     Y = data['species']
     # Since KNN doesnt accept string Labels we encode it
@@ -35,6 +34,7 @@ def KNN_demo():
     classifier.fit(x_train,y_train)
     y_pred = classifier.predict(x_test)
     
+    user_guide()
     user_demo(classifier, labelen=le)
     accuracy_display(y_test, y_pred)
     cm_display(y_test, y_pred)

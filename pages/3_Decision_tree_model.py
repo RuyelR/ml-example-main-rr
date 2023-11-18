@@ -19,7 +19,7 @@ import numpy as np
 
 import streamlit as st
 from streamlit.hello.utils import show_code
-from utils import iris_clean_data,accuracy_display,cm_display,user_demo
+from utils import iris_clean_data,accuracy_display,cm_display,user_demo,user_guide
 
 def Decision_Tree_demo():
     data = iris_clean_data()
@@ -31,6 +31,7 @@ def Decision_Tree_demo():
     clf = DecisionTreeClassifier()
     y_pred = clf.fit(x_train, y_train).predict(x_test)
     
+    user_guide()
     user_demo(clf)
     accuracy_display(y_test, y_pred)
     cm_display(y_test, y_pred)
