@@ -20,6 +20,7 @@ import numpy as np
 import streamlit as st
 from streamlit.hello.utils import show_code
 from utils import iris_clean_data,accuracy_display,cm_display,user_demo
+from utils import user_guide
 
 
 def Bayes_demo():
@@ -30,7 +31,7 @@ def Bayes_demo():
     gnb = GaussianNB()
     y_pred = gnb.fit(x_train, y_train).predict(x_test)
     
-    
+    user_guide()
     user_demo(gnb)
     accuracy_display(y_test, y_pred)
     cm_display(y_test, y_pred)
