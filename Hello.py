@@ -31,12 +31,14 @@ def run():
 
     st.markdown(
         """
-        Hi! I am Ruyel and this is my first Streamlit app demonstrating three different machine learning algorithm approaches to the Iris dataset.
+        Hi! I am Ruyel and this is my first Streamlit app demonstrating three different machine learning algorithm approaches to the Iris dataset. 
+        You can use the buttons on the sidebar to reveal more about the dataset. \nSelect a model from the sidebar to demo.
     """
     )
+
     data = iris_clean_data()
 
-    if st.sidebar.toggle(label="Check Data",value=False) != False:
+    if st.sidebar.toggle(label="Check Data",value=True) != False:
         n_rows = st.sidebar.slider(label="Number of rows", min_value=1,max_value=5,value=3)
         st.write("### Sample of dataset:")
         st.write("First %s rows: "%n_rows, data.head(n_rows))
@@ -45,9 +47,13 @@ def run():
         st.write("Last %s rows:"%n_rows, data.tail(n_rows))
     if st.sidebar.toggle(label="Describe data",value=False) != False:
         st.write("### Describing all features: ", data.describe()) 
-    Sdtframe = data.groupby('species')
-    st.write("Mean: \n",Sdtframe.mean())
-    st.write("\nMedian/50% quantile: \n", Sdtframe.quantile().pivot_table(columns="species",))
+        
+        "The Mean and Median shows best feature values for each species"
+        Sdtframe = data.groupby('species')
+        st.write("Mean: \n",Sdtframe.mean())
+        st.write("\nMedian/50% quantile: \n", Sdtframe.quantile().pivot_table(columns="species",))
+
+    "Charts show the overlap between features in sepal/petal length and width."
     st.scatter_chart(data=data,x='sepal_length', y='sepal_width',size=30,use_container_width=True)
     st.bar_chart(data=data, x='petal_length', y='petal_width', use_container_width=True)
 
