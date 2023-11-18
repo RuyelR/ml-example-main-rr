@@ -58,7 +58,7 @@ def user_demo(classifier, labelen=None):
 
 def show_code(demo):
     """Showing the code of the demo."""
-    show_code = st.sidebar.checkbox("Show code", value=False)
+    show_code = st.sidebar.checkbox("Show code", value=True)
     if show_code:
         # Showing the code of the demo.
         st.markdown("## Code")
