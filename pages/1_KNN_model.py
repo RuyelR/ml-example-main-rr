@@ -34,7 +34,7 @@ def KNN_demo():
     classifier.fit(x_train,y_train)
     y_pred = classifier.predict(x_test)
     
-    user_guide()
+    
     user_demo(classifier, labelen=le)
     accuracy_display(y_test, y_pred)
     cm_display(y_test, y_pred)

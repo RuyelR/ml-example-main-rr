@@ -30,7 +30,7 @@ def Bayes_demo():
     gnb = GaussianNB()
     y_pred = gnb.fit(x_train, y_train).predict(x_test)
     
-    user_guide()
+    
     user_demo(gnb)
     accuracy_display(y_test, y_pred)
     cm_display(y_test, y_pred)

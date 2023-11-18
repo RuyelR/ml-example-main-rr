@@ -31,7 +31,7 @@ def Decision_Tree_demo():
     clf = DecisionTreeClassifier()
     y_pred = clf.fit(x_train, y_train).predict(x_test)
     
-    user_guide()
+    
     user_demo(clf)
     accuracy_display(y_test, y_pred)
     cm_display(y_test, y_pred)
